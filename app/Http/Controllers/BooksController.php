@@ -12,7 +12,8 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        $books = Books::paginate(5);
+        return response()->json($books);
     }
 
     /**
