@@ -1,0 +1,224 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Gestion des Articles",
+        "description": "Documentation de l'API pour la gestion des articles",
+        "contact": {
+            "email": "support@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/",
+            "description": "Serveur local"
+        }
+    ],
+    "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get paginated list of books",
+                "operationId": "ce15729f9601c4ec7b35fcfc7db18ab9",
+                "responses": {
+                    "200": {
+                        "description": "List of books",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Books"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Create a new book",
+                "operationId": "652aa3e0b7c92928cec31183c949feb6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Books"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Books"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get a single book by ID",
+                "operationId": "39553c0a7d0a821be83e1df44c3454cf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Books"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update a book",
+                "operationId": "3635481a9d05b33ef869c5a0fe29fb21",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Books"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Book updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Books"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete a book",
+                "operationId": "dd4c5a05da6ef8f06bf272bbc3924264",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book deleted successfully"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Books": {
+                "title": "Books",
+                "description": "Books model",
+                "properties": {
+                    "id": {
+                        "description": "Book ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "title": {
+                        "description": "Book title",
+                        "type": "string"
+                    },
+                    "author": {
+                        "description": "Book author",
+                        "type": "string"
+                    },
+                    "isbn": {
+                        "description": "Book ISBN",
+                        "type": "string"
+                    },
+                    "cover_image": {
+                        "description": "Book cover image URL",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Book description",
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "description": "Book quantity",
+                        "type": "integer"
+                    },
+                    "available": {
+                        "description": "Book availability status",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "description": "Creation date",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last updated date",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Books"
+        }
+    ]
+}

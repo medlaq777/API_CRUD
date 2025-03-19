@@ -315,4 +315,12 @@ return [
             'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
         ],
     ],
+    'info' => [
+    'title' => 'My API Documentation',
+    'description' => 'Comprehensive API documentation for my Laravel application.',
+    'version' => '1.0.0',
+    'contact' => [
+        'email' => 'support@example.com',
+    ],
+    ],
 ];
