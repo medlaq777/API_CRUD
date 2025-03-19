@@ -7,26 +7,13 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $books = Books::paginate(5);
         return response()->json($books);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validate = $request->validate([
@@ -46,27 +33,14 @@ class BooksController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Books $books)
+    public function show($id)
     {
-        return response()->json($books);
+        return Books::findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Books $books)
+    public function update(Request $request, $id)
     {
-        return response()->json($books);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Books $books)
-    {
+        $book = Books::find($id);
         $validate = $request->validate([
             'title' => 'required',
             'author' => 'required',
@@ -77,19 +51,17 @@ class BooksController extends Controller
             'available' => 'required',
         ]);
 
-        $books->update($validate);
+        $book->update($validate);
         return response()->json([
             'message' => 'Book updated successfully',
-            'data' => $books
+            'data' => $book
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Books $books)
+    public function destroy($id)
     {
-        $books->destroy($books->id);
+        $books = Books::find($id);
+        $books->delete();
         return response()->json([
             'message' => 'Book deleted successfully',
             'data' => $books
