@@ -59,7 +59,8 @@ class BooksController extends Controller
      */
     public function edit(Books $books)
     {
-        //
+        $books = Books::find($books);
+        return response()->json($books);
     }
 
     /**
@@ -67,7 +68,22 @@ class BooksController extends Controller
      */
     public function update(Request $request, Books $books)
     {
-        //
+        $validate = $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'isb' => 'required',
+            'cover' => 'required',
+            'description' => 'required',
+            'quantity' => 'required',
+            'available' => 'required',
+        ]);
+
+        $books = Books::find($books);
+        $books->update($validate);
+        return response()->json([
+            'message' => 'Book updated successfully',
+            'data' => $books
+        ]);
     }
 
     /**
@@ -75,6 +91,11 @@ class BooksController extends Controller
      */
     public function destroy(Books $books)
     {
-        //
+        $books = Books::find($books);
+        $books->delete();
+        return response()->json([
+            'message' => 'Book deleted successfully',
+            'data' => $books
+        ]);
     }
 }
