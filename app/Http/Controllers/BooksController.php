@@ -29,7 +29,21 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'isb' => 'required',
+            'cover' => 'required',
+            'description' => 'required',
+            'quantity' => 'required',
+            'available' => 'required',
+        ]);
+
+        $books = Books::create($validate);
+        return response()->json([
+            'message' => 'Book created successfully',
+            'data' => $books
+        ]);
     }
 
     /**
